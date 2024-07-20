@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'package:castle_up/components/home_header.dart';
 import 'package:castle_up/widgets/tower.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -68,17 +69,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Stack(
         children: [
+          Image.asset(
+            'assets/background.png',
+            fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
+          ),
           Column(
             children: [
-              Expanded(
-                flex: 2,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text('Torre A: $towerA'),
-                    Text('Torre B: $towerB'),
-                  ],
-                ),
+              HomeHeader(towerA: towerA, towerB: towerB),
+              SizedBox(
+                height: 10,
               ),
               Expanded(
                 flex: 18,
@@ -92,8 +93,8 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Tower(
-                            builder:
-                                (BuildContext context, void Function() increase) {
+                            builder: (BuildContext context,
+                                void Function() increase) {
                               increaseA = increase;
                             },
                             pressKey: LogicalKeyboardKey.keyS,
@@ -104,8 +105,8 @@ class _HomePageState extends State<HomePage> {
                             },
                           ),
                           Tower(
-                            builder:
-                                (BuildContext context, void Function() increase) {
+                            builder: (BuildContext context,
+                                void Function() increase) {
                               increaseB = increase;
                             },
                             pressKey: LogicalKeyboardKey.keyL,

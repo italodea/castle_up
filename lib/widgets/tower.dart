@@ -4,11 +4,15 @@ import 'package:castle_up/widgets/tower_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-typedef MyBuilder = void Function(BuildContext context, void Function() increase);
-
+typedef MyBuilder = void Function(
+    BuildContext context, void Function() increase);
 
 class Tower extends StatefulWidget {
-  Tower({super.key, required this.increaseNumber, required this.pressKey, required this.builder});
+  Tower(
+      {super.key,
+      required this.increaseNumber,
+      required this.pressKey,
+      required this.builder});
 
   final MyBuilder builder;
   final LogicalKeyboardKey pressKey;
@@ -20,12 +24,11 @@ class Tower extends StatefulWidget {
 
 class _TowerState extends State<Tower> {
   addToBody({bool buttonClick = false}) {
-    if(buttonClick){
+    if (buttonClick) {
       widget.increaseNumber();
     }
     if (listTower.length < MediaQuery.of(context).size.height / 85) {
       setState(() {
-        
         listTower.add(Image.asset(
           'assets/body.png',
           width: 92,
@@ -48,10 +51,6 @@ class _TowerState extends State<Tower> {
     ),
   ];
 
-
-  
-
-
   @override
   Widget build(BuildContext context) {
     widget.builder(context, addToBody);
@@ -59,6 +58,16 @@ class _TowerState extends State<Tower> {
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
+        Align(
+          alignment: Alignment.topCenter,
+          child: InkWell(
+            onTap: () => widget.increaseNumber(),
+            child: TowerButton(
+              addToBody: () => addToBody(buttonClick: true),
+              pressKey: widget.pressKey,
+            ),
+          ),
+        ),
         Expanded(
           child: SizedBox(
             width: 92,
@@ -73,16 +82,6 @@ class _TowerState extends State<Tower> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: listTower,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: InkWell(
-                    onTap: () => widget.increaseNumber(),
-                    child: TowerButton(
-                      addToBody: () => addToBody(buttonClick: true),
-                      pressKey: widget.pressKey,
-                    ),
                   ),
                 ),
               ],
