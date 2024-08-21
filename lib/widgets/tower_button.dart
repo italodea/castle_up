@@ -26,7 +26,7 @@ class TowerButton extends StatelessWidget {
     return InkWell(
       onTap: () => addToBody(),
       child: Container(
-        width: 200,
+        width: 170,
         height: 50,
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(

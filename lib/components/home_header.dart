@@ -193,13 +193,13 @@ class _HomeHeaderState extends State<HomeHeader> {
                 children: [
                   Text(
                     'Torre A: ${widget.towerA}',
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                   Column(
                     children: [
                       Container(
                         height: 70,
-                        width: 70,
+                        width: 50,
                         decoration: BoxDecoration(
                           color: getBackgroundColorTimer(),
                         ),
@@ -210,7 +210,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                               child: Text(
                                 '$_start',
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 20,
                                   color: _start == _end
                                       ? Colors.red
                                       : Colors.white,
@@ -224,7 +224,7 @@ class _HomeHeaderState extends State<HomeHeader> {
                   ),
                   Text(
                     'Torre B: ${widget.towerB}',
-                    style: const TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ],
               ),
