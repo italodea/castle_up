@@ -24,6 +24,10 @@ class _HomePageState extends State<HomePage> {
   late void Function() increaseA;
   late void Function() increaseB;
 
+  double? sizeWidth;
+
+  String backgroundPlayerA = 'assets/background.png';
+
   KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent event) {
     if (event.logicalKey == LogicalKeyboardKey.keyS &&
         event.character?.toUpperCase() == "S" &&
@@ -67,62 +71,54 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          Image.asset(
-            'assets/background.png',
-            fit: BoxFit.cover,
-            height: double.infinity,
-            width: double.infinity,
-          ),
-          Column(
-            children: [
-              HomeHeader(towerA: towerA, towerB: towerB),
-              SizedBox(
-                height: 10,
+          HomeHeader(towerA: towerA, towerB: towerB),
+          Expanded(
+            flex: 18,
+            child: Focus(
+              focusNode: _focusNode,
+              onKeyEvent: _handleKeyEvent,
+              child: ListenableBuilder(
+                listenable: _focusNode,
+                builder: (context, child) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Tower(
+                        builder:
+                            (BuildContext context, void Function() increase) {
+                          increaseA = increase;
+                        },
+                        pressKey: LogicalKeyboardKey.keyS,
+                        increaseNumber: () {
+                          setState(() {
+                            towerA = towerA + 1;
+                          });
+                        },
+                      ),
+                      VerticalDivider(
+                        color: Colors.black,
+                        width: 10,
+                        thickness: 10,
+                      ),
+                      Tower(
+                        builder:
+                            (BuildContext context, void Function() increase) {
+                          increaseB = increase;
+                        },
+                        pressKey: LogicalKeyboardKey.keyL,
+                        increaseNumber: () {
+                          setState(() {
+                            towerB = towerB + 1;
+                          });
+                        },
+                      )
+                    ],
+                  );
+                },
               ),
-              Expanded(
-                flex: 18,
-                child: Focus(
-                  focusNode: _focusNode,
-                  onKeyEvent: _handleKeyEvent,
-                  child: ListenableBuilder(
-                    listenable: _focusNode,
-                    builder: (context, child) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Tower(
-                            builder: (BuildContext context,
-                                void Function() increase) {
-                              increaseA = increase;
-                            },
-                            pressKey: LogicalKeyboardKey.keyS,
-                            increaseNumber: () {
-                              setState(() {
-                                towerA = towerA + 1;
-                              });
-                            },
-                          ),
-                          Tower(
-                            builder: (BuildContext context,
-                                void Function() increase) {
-                              increaseB = increase;
-                            },
-                            pressKey: LogicalKeyboardKey.keyL,
-                            increaseNumber: () {
-                              setState(() {
-                                towerB = towerB + 1;
-                              });
-                            },
-                          )
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),
