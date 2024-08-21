@@ -28,7 +28,13 @@ class _HomePageState extends State<HomePage> {
 
   String backgroundPlayerA = 'assets/background.png';
 
+  bool gameRunning = false;
+
   KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent event) {
+    if (!gameRunning) {
+      return KeyEventResult.ignored;
+    }
+
     if (event.logicalKey == LogicalKeyboardKey.keyS &&
         event.character?.toUpperCase() == "S" &&
         !pressingS) {
@@ -71,9 +77,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          HomeHeader(towerA: towerA, towerB: towerB),
           Expanded(
             flex: 18,
             child: Focus(
@@ -119,6 +124,28 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
+          ),
+          HomeHeader(
+            towerA: towerA,
+            towerB: towerB,
+            onStart: () {
+              setState(() {
+                gameRunning = true;
+              });
+            },
+            onEnd: () {
+              setState(() {
+                gameRunning = false;
+              });
+            },
+            resetValues: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ),
+              );
+            },
           ),
         ],
       ),

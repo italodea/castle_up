@@ -95,7 +95,7 @@ class _TowerState extends State<Tower> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: 10,
+              height: 140,
               width: (MediaQuery.of(context).size.width - 10) / 2,
             ),
             Align(
