@@ -5,11 +5,13 @@ import 'package:flutter/services.dart';
 
 class TowerButton extends StatelessWidget {
   const TowerButton(
-      {super.key, required this.pressKey, required this.addToBody});
+      {super.key, this.pressKey, required this.addToBody, this.label});
 
-  final LogicalKeyboardKey pressKey;
+  final LogicalKeyboardKey? pressKey;
 
   final void Function() addToBody;
+
+  final String? label;
 
   bool isDesktop() {
     try {
@@ -37,7 +39,7 @@ class TowerButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            isDesktop() ? "Pressione ${pressKey.keyLabel}" : "Clique",
+            label ?? ( isDesktop() ? "Pressione ${pressKey!.keyLabel}" : "Clique"),
             style: const TextStyle(
               color: Colors.white,
               fontSize: 12,
