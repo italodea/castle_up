@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:castle_up/widgets/tower_button.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader(
@@ -12,7 +13,8 @@ class HomeHeader extends StatefulWidget {
       required this.towerA,
       required this.towerB,
       required this.onStart,
-      required this.onEnd, required this.resetValues});
+      required this.onEnd,
+      required this.resetValues});
   final int towerA;
   final int towerB;
 
@@ -84,7 +86,7 @@ class _HomeHeaderState extends State<HomeHeader> {
         builder: (context) {
           return Dialog(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -110,6 +112,33 @@ class _HomeHeaderState extends State<HomeHeader> {
                   SizedBox(
                     height: 15,
                   ),
+                  Text("Obrigado por jogar nosso joguinho. Jogo feito para a disciplina de Fundamentos de Jogos Digitais."),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text("Desenvolvido por: Gabriel Cavalcante e Ítalo de Azevedo"),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      launchUrl(
+                        Uri.parse(
+                          'https://www.youtube.com/@thejoe1469/videos',
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Music by CaduceusJ.',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   TowerButton(
                     addToBody: () {
                       Navigator.pop(context);
@@ -125,7 +154,7 @@ class _HomeHeaderState extends State<HomeHeader> {
   }
 
   Color getBackgroundColorTimer() {
-    if (_start < 10) {
+    if (_start < 20) {
       return Colors.black;
     }
     if (_start == _end) {
