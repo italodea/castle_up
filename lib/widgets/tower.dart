@@ -12,10 +12,11 @@ class Tower extends StatefulWidget {
       {super.key,
       required this.increaseNumber,
       required this.pressKey,
-      required this.builder});
+      required this.builder, required this.isGameRunning});
 
   final MyBuilder builder;
   final LogicalKeyboardKey pressKey;
+  final bool isGameRunning;
   Function increaseNumber;
 
   @override
@@ -24,6 +25,9 @@ class Tower extends StatefulWidget {
 
 class _TowerState extends State<Tower> {
   addToBody({bool buttonClick = false}) {
+    if(!widget.isGameRunning){
+      return;
+    }
     if (buttonClick) {
       widget.increaseNumber();
     }

@@ -78,51 +78,51 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          Expanded(
-            flex: 18,
-            child: Focus(
-              focusNode: _focusNode,
-              onKeyEvent: _handleKeyEvent,
-              child: ListenableBuilder(
-                listenable: _focusNode,
-                builder: (context, child) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Tower(
-                        builder:
-                            (BuildContext context, void Function() increase) {
-                          increaseA = increase;
-                        },
-                        pressKey: LogicalKeyboardKey.keyS,
-                        increaseNumber: () {
-                          setState(() {
-                            towerA = towerA + 1;
-                          });
-                        },
-                      ),
-                      VerticalDivider(
-                        color: Colors.black,
-                        width: 10,
-                        thickness: 10,
-                      ),
-                      Tower(
-                        builder:
-                            (BuildContext context, void Function() increase) {
-                          increaseB = increase;
-                        },
-                        pressKey: LogicalKeyboardKey.keyL,
-                        increaseNumber: () {
-                          setState(() {
-                            towerB = towerB + 1;
-                          });
-                        },
-                      )
-                    ],
-                  );
-                },
-              ),
+          Focus(
+            focusNode: _focusNode,
+            onKeyEvent: _handleKeyEvent,
+            child: ListenableBuilder(
+              listenable: _focusNode,
+              builder: (context, child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Tower(
+                      builder:
+                          (BuildContext context, void Function() increase) {
+                        increaseA = increase;
+                      },
+                      isGameRunning: gameRunning,
+                      pressKey: LogicalKeyboardKey.keyS,
+                      increaseNumber: () {
+                        setState(() {
+                          towerA = towerA + 1;
+                        });
+                      },
+                    ),
+                    VerticalDivider(
+                      color: Colors.black,
+                      width: 10,
+                      thickness: 10,
+                    ),
+                    Tower(
+                      builder:
+                          (BuildContext context, void Function() increase) {
+                        increaseB = increase;
+                      },
+                      isGameRunning: gameRunning,
+                      pressKey: LogicalKeyboardKey.keyL,
+                      increaseNumber: () {
+                        setState(() {
+                          towerB = towerB + 1;
+                        });
+                      },
+                    )
+                  ],
+                );
+              },
             ),
           ),
           HomeHeader(
