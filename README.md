@@ -13,6 +13,8 @@ Castle Up é um jogo que deve ser jogado por duas pessoas, onde ambas devem util
 # Video demonstrativo do jogo
 [![](https://markdown-videos-api.jorgenkh.no/youtube/NgdnS1az-8E)](https://youtu.be/NgdnS1az-8E)
 
+Link para o jogo no Itch.io
+[Acesse](https://italodea.itch.io/castle-up)
 
 Faça o download do apk para Android:
 [Download](https://github.com/italodea/castle_up/raw/main/app-release.apk)
